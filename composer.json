@@ -1,0 +1,11 @@
+{
+    "name": "new-world-orders/scaffold",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "require": {},
+    "autoload": {
+    "psr-4": {
+      "NewWorldOrders\\Scaffold\\": "src/"
+    }   
+  }
+}
