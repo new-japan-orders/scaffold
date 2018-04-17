@@ -77,3 +77,19 @@ return [
     }   
 
 ```
+
+``` app/Exceptions/Handler.php
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {   
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }   
+
+        if (in_array('admin', $exception->guards())) {
+            return redirect()->guest(route('admin.login'));
+        }   
+        return redirect()->guest(route('front.login'));
+    } 
+
+```
