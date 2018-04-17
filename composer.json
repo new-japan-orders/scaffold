@@ -1,11 +1,18 @@
 {
-    "name": "new-world-orders/scaffold",
-    "type": "library",
-    "license": "MIT",
-    "require": {},
-    "autoload": {
+  "name": "new-world-orders/scaffold",
+  "type": "library",
+  "license": "MIT",
+  "require": {},
+  "autoload": {
     "psr-4": {
       "NewWorldOrders\\Scaffold\\": "src/"
     }   
+  },
+  "extra": {
+    "laravel": {
+        "providers": [
+            "NewWorldOrders\\Scaffold\\ScaffoldServiceProvider"
+        ],
+    }
   }
 }
