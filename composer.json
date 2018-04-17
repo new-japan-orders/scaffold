@@ -1,6 +1,6 @@
 {
     "name": "new-world-orders/scaffold",
-    "type": "composer-plugin",
+    "type": "library",
     "license": "MIT",
     "require": {},
     "autoload": {
