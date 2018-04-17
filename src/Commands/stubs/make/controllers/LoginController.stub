@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Http\Controllers\{{namespace}}\Auth;
+
+use App\Http\Controllers\Auth\LoginController as Controller;
+
+class LoginController extends Controller
+{
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/{{app_name}}/home';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest:{{app_name}}')->except('logout');
+    }
+
+    public function logout(\Illuminate\Http\Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+
+        return redirect('/{{app_name}}/login');
+    }
+
+    public function showLoginForm()
+    {   
+        return view('{{app_name}}.auth.login');
+    }
+
+    protected function guard()
+    {   
+        return \Auth::guard('{{app_name}}');
+    }
+}
