@@ -12,7 +12,7 @@
     "laravel": {
         "providers": [
             "NewWorldOrders\\Scaffold\\ScaffoldServiceProvider"
-        ],
+        ]
     }
   }
 }
