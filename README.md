@@ -184,9 +184,11 @@ scaffold:mvcコマンドを利用すると、
 前述のディレクトリ構成を作成した上で、
 Model, Controller, Viewの3つを作成します。
 このコマンドは、
+
 * scaffold:controller
 * scaffold:model
 * scaffold:view
+
 を実行するのと同じ意味です。
 ```
 php artisan scaffold:mvc front user car
