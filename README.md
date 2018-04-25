@@ -128,7 +128,8 @@ return [
 
 ```
 #### 認証済みの際のRedirect先修正
-``` app/Http/Middleware/RedirectIfAuthenticated.php
+app/Http/Middleware/RedirectIfAuthenticated.php
+``` 
 
     public function handle($request, Closure $next, $guard = null)
     {   
@@ -141,7 +142,8 @@ return [
 
 ```
 #### 認証失敗時のリダイレクト先の修正
-``` app/Exceptions/Handler.php
+app/Exceptions/Handler.php
+``` 
 
     protected function unauthenticated($request, AuthenticationException $exception)
     {   
@@ -157,25 +159,17 @@ return [
 
 ```
 #### routeの設定
-``` app/Providers/RouteServiceProvider.php
+app/Providers/RouteServiceProvider.php
+```
     protected function mapWebRoutes()
     {   
-        $this->checkApp();
         Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path($this->route_file));
-    }   
+             ->namespace('App\Front\Http\Controllers')
+             ->group(base_path('routes/front.php'));
 
-    protected function checkApp()
-    {   
-        $url = url()->current();
-        if (strpos($url, 'front') !== false) {
-            $this->namespace = 'App\Front\Http\Controllers';
-            $this->route_file = 'routes/front.php';
-        } else if (strpos($url, 'admin') !== false) {
-            $this->namespace = 'App\Admin\Http\Controllers';
-           $this->route_file = 'routes/admin.php';
-        }   
+        Route::middleware('web')
+             ->namespace('App\Admin\Http\Controllers')
+             ->group(base_path('routes/admin.php'));
     }   
 ```
 
@@ -199,6 +193,5 @@ php artisan scaffold:controller front car
 php artisan scaffold:model car
 php artisan scaffold:view front user car
 ```
-
 
 
