@@ -49,5 +49,32 @@ class ScaffoldServiceProvider extends ServiceProvider {
             return $app['NewWorldOrders\Scaffold\Commands\ScaffoldInitCommand'];
         }); 
         $this->commands('command.nwo.scaffold.init');
+
+        $this->app->singleton('command.nwo.scaffold.controller', function ($app) {
+            return $app['NewWorldOrders\Scaffold\Commands\ScaffoldControllerCommand'];
+        }); 
+        $this->commands('command.nwo.scaffold.controller');
+
+        $this->app->singleton('command.nwo.scaffold.model', function ($app) {
+            return $app['NewWorldOrders\Scaffold\Commands\ScaffoldModelCommand'];
+        }); 
+        $this->commands('command.nwo.scaffold.model');
+
+        $this->app->singleton('command.nwo.scaffold.view', function ($app) {
+            return $app['NewWorldOrders\Scaffold\Commands\ScaffoldViewCommand'];
+        }); 
+        $this->commands('command.nwo.scaffold.view');
+
+        $this->app->singleton('command.nwo.scaffold.mvc', function ($app) {
+            return $app['NewWorldOrders\Scaffold\Commands\ScaffoldMVCCommand'];
+        }); 
+        $this->commands('command.nwo.scaffold.mvc');
+
+        $this->app->singleton('command.nwo.scaffold.policy', function ($app) {
+            return $app['NewWorldOrders\Scaffold\Commands\ScaffoldPolicyCommand'];
+        }); 
+        $this->commands('command.nwo.scaffold.policy');
+
+
     }
 }

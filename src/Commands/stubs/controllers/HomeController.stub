@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\{{namespace}};
+namespace App\{{app_singular_camel}}\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\{{app_singular_camel}}\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:{{app_name}}');
+        $this->middleware('auth:{{app_singular_snake}}');
     }
 
     /**
@@ -24,6 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('{{app_name}}.home');
+        return view('{{app_singular_snake}}.home');
     }
 }

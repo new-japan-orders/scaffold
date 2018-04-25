@@ -18,7 +18,7 @@ class ScaffoldInitCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a scaffold with bootstrap 3';
+    protected $description = 'Create new App and Auth.';
 
     public function __construct()
     {   
@@ -38,7 +38,7 @@ class ScaffoldInitCommand extends Command
         $model_name = strtolower($model_name);
 
         $this->call('scaffold:app', [
-            'name' => $app_name
+            'app_name' => $app_name
         ]);
         
         $this->call('scaffold:auth', [
@@ -47,18 +47,4 @@ class ScaffoldInitCommand extends Command
         ]);
         
     }
-
-    /** 
-     * Compiles the HomeController stub.
-     *
-     * @return string
-     */
-    protected function compileControllerStub($stub_filename, $namespace)
-    {
-        return str_replace(
-            '{{namespace}}',
-            $namespace,
-            file_get_contents(__DIR__.'/stubs/make/controllers/'.$stub_filename.'.stub')
-        );
-    }   
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Create{{camel_table_name}}Table extends Migration
+class Create{{model_singular_camel}}Table extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Create{{camel_table_name}}Table extends Migration
      */
     public function up()
     {
-        Schema::create('{{table_name}}', function (Blueprint $table) {
+        Schema::create('{{model_plural_snake}}', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
@@ -30,6 +30,6 @@ class Create{{camel_table_name}}Table extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('{{table_name}}');
+        Schema::dropIfExists('{{model_plural_snake}}');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class {{model_name}} extends Authenticatable
+class {{model_singular_camel}} extends Authenticatable
 {
     use Notifiable;
 

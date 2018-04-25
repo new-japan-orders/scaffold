@@ -1,0 +1,26 @@
+@extends('{{app_singular_snake}}.layouts.app')
+
+@section('header')
+    <div class="page-header">
+        <h1><i class="glyphicon glyphicon-plus"></i> {{model_singular_camel}} / Create </h1>
+    </div>
+@endsection
+
+@section('content')
+    @include('error')
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <form action="{{ route('{{app_singular_snake}}.{{model_plural_snake}}.store') }}" method="POST">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                <div class="well well-sm">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <a class="btn btn-link pull-right" href="{{ route('{{app_singular_snake}}.{{model_plural_snake}}.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+@endsection

@@ -1,4 +1,4 @@
-@extends('{{app_name}}.layouts.app')
+@extends('{{app_singular_snake}}.layouts.app')
 
 @section('content')
 <div class="container">

@@ -41,8 +41,8 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link" href="{{ route('{{app_name}}.login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('{{app_name}}.register') }}">{{ __('Register') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('{{app_singular_snake}}.login') }}">{{ __('Login') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('{{app_singular_snake}}.register') }}">{{ __('Register') }}</a></li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -50,13 +50,13 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('{{app_name}}.logout') }}"
+                                    <a class="dropdown-item" href="{{ route('{{app_singular_snake}}.logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('{{app_name}}.logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('{{app_singular_snake}}.logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
@@ -67,7 +67,10 @@
             </div>
         </nav>
 
+        <head
+
         <main class="py-4">
+            @yield('header')
             @yield('content')
         </main>
     </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\{{namespace}}\Auth;
+namespace App\{{app_singular_camel}}\Http\Controllers\Auth;
 
 use App\Http\Controllers\Auth\LoginController as Controller;
 
@@ -11,7 +11,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/{{app_name}}/home';
+    protected $redirectTo = '/{{app_singular_snake}}/home';
 
     /**
      * Create a new controller instance.
@@ -20,7 +20,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:{{app_name}}')->except('logout');
+        $this->middleware('guest:{{app_singular_snake}}')->except('logout');
     }
 
     public function logout(\Illuminate\Http\Request $request)
@@ -29,16 +29,16 @@ class LoginController extends Controller
         $request->session()->flush();
         $request->session()->regenerate();
 
-        return redirect('/{{app_name}}/login');
+        return redirect('/{{app_singular_snake}}/login');
     }
 
     public function showLoginForm()
     {   
-        return view('{{app_name}}.auth.login');
+        return view('{{app_singular_snake}}.auth.login');
     }
 
     protected function guard()
     {   
-        return \Auth::guard('{{app_name}}');
+        return \Auth::guard('{{app_singular_snake}}');
     }
 }

@@ -1,0 +1,71 @@
+<?php
+
+namespace App\{{app_singular_camel}}\Policies;
+
+use App\Models\{{model_singular_camel}};
+use App\Models\{{auth_singular_camel}};
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class {{model_singular_camel}}Policy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Determine whether the user can view the model index.
+     *
+     * @param  \App\Models\{{auth_singular_camel}}  $user
+     * @return mixed
+     */
+    public function index({{auth_singular_camel}} $user)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can view the model detail.
+     *
+     * @param  \App\Models\{{auth_singular_camel}}   $user
+     * @param  \App\Models\{{model_singular_camel}}  $model
+     * @return mixed
+     */
+    public function show({{auth_singular_camel}} $user, {{model_singular_camel}} $model)
+    {
+        return true;
+    }
+
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\{{auth_singular_camel}}  $user
+     * @return mixed
+     */
+    public function create({{auth_singular_camel}} $user)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     *
+     * @param  \App\Models\{{auth_singular_camel}}   $user
+     * @param  \App\Models\{{model_singular_camel}}  $model
+     * @return mixed
+     */
+    public function update({{auth_singular_camel}} $user, {{model_singular_camel}} $model)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     *
+     * @param  \App\Models\{{auth_singular_camel}}   $user
+     * @param  \App\Models\{{model_singular_camel}}  $model
+     * @return mixed
+     */
+    public function delete({{auth_singular_camel}} $user, {{model_singular_camel}} $model)
+    {
+        return true;
+    }
+}

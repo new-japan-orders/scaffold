@@ -3,22 +3,25 @@
 namespace NewWorldOrders\Scaffold\Commands;
 
 use Illuminate\Console\Command;
+use NewWorldOrders\Scaffold\ArgumentsTrait;
 
 class ScaffoldAppCommand extends Command
 {
+    use ArgumentsTrait;
+
     /**
      * The console command name!
      *
      * @var string
      */
-    protected $signature = 'scaffold:app {name?} {--default}';
+    protected $signature = 'scaffold:app {app_name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a scaffold with bootstrap 3';
+    protected $description = 'Create a new App.';
 
     public function __construct()
     {   
@@ -32,35 +35,22 @@ class ScaffoldAppCommand extends Command
      */
     public function handle()
     {
-        $default = $this->option('default');
-        $name = $this->argument('name');
+        $this->getArguments();
+
+        $controller_dirpath = app_path($this->app->singular_camel.'/Http/Controllers');
+        if (file_exists($controller_dirpath)) {
+            $this->error("[ERROR]{$controller_dirpath} directory is already exists...skip");
+        } else {    
+            mkdir($controller_dirpath, 0775, true);
+        }
         
-        $names= [];
-        if (!$default && !empty($name)) {
-            $names[] = strtolower($name);
+        $resource_dirpath = resource_path('/views/' .$this->app->singular_snake); 
+        if (file_exists($resource_dirpath)) {
+            $this->error("[ERROR]{$resource_dirpath} directory is already exists...skip");
         } else {
-            $names[] = 'front';
-            $names[] = 'admin';
+            mkdir($resource_dirpath);
         }
-
-        $app_path = app_path('Http/Controllers/');
-        $resource_path = resource_path();
-
-        foreach ($names as $name) {
-            $controller_dirname = ucfirst($name);
-            $controller_dirpath = $app_path . $controller_dirname;
-            if (file_exists($controller_dirpath)) {
-                $this->error("[ERROR]{$controller_dirpath} directory is already exists...skip");
-            } else {    
-                mkdir($controller_dirpath);
-            }
-            $resource_dirpath = $resource_path . '/views/' .$name; 
-            //echo "{$resource_dirpath}\n"; 
-            if (file_exists($resource_dirpath)) {
-                $this->error("[ERROR]{$resource_dirpath} directory is already exists...skip");
-            } else {
-                mkdir($resource_dirpath);
-            }
-        }
+        
+        
     }
 }

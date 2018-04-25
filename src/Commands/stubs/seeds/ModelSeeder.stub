@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\{{model_name}};
+use App\Models\{{model_singular_camel}};
 
-class {{model_name}}Seeder extends Seeder
+class {{model_singular_camel}}Seeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class {{model_name}}Seeder extends Seeder
      */
     public function run()
     {
-        {{model_name}}::create([
+        {{model_singular_camel}}::create([
             'name' => 'Test',
             'email' => 'test@test.com',
             'password' => Hash::make('testtest'),

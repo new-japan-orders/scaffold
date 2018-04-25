@@ -3,25 +3,28 @@
 namespace NewWorldOrders\Scaffold\Commands;
 
 use Illuminate\Console\Command;
+use NewWorldOrders\Scaffold\Stub;
+use NewWorldOrders\Scaffold\ArgumentsTrait;
+
 
 class ScaffoldAuthCommand extends Command
 {
+    use ArgumentsTrait;
+
     /**
      * The console command name!
      *
      * @var string
      */
     protected $signature = 'scaffold:auth {app_name} {model_name}';
-    protected $app_name = '';
-    protected $namespace = '';
-    protected $model_name = '';
-    protected $table_name = '';
 
     protected $controllers = [
-        'ForgotPasswordController.stub' => 'ForgotPasswordController.php', 
-        'LoginController.stub' => 'LoginController.php',
-        'RegisterController.stub' => 'RegisterController.php',
-        'ResetPasswordController.stub' => 'ResetPasswordController.php',
+        'ForgotPasswordController.stub' => 'Auth/ForgotPasswordController.php', 
+        'LoginController.stub' => 'Auth/LoginController.php',
+        'RegisterController.stub' => 'Auth/RegisterController.php',
+        'ResetPasswordController.stub' => 'Auth/ResetPasswordController.php',
+        'Controller.stub' => 'Controller.php',
+        'HomeController.stub' => 'HomeController.php',
     ];
     protected $views = [
         'home.stub' => 'home.blade.php',
@@ -37,7 +40,7 @@ class ScaffoldAuthCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a scaffold with bootstrap 3';
+    protected $description = 'Create a new Auth.';
 
     public function __construct()
     {   
@@ -51,47 +54,30 @@ class ScaffoldAuthCommand extends Command
      */
     public function handle()
     {
-        $app_name = $this->argument('app_name');
-        $this->app_name = strtolower($app_name);
-        $this->namespace = ucfirst($this->app_name);
-        
-        $model_name = strtolower($this->argument('model_name'));
-        $this->model_name = ucfirst($model_name);
-        $this->table_name = str_plural($model_name);
-        $this->camel_table_name = ucfirst($this->table_name);
-        
+        $this->getArguments();
+ 
         $this->copyControllers();
         $this->copyResources();
         $this->copyModel();
         $this->copyMigration(); 
         $this->copySeeder();
-        file_put_contents(
-            base_path('routes/web.php'),
-            $this->compileStub(__DIR__.'/stubs/make/routes.stub'),
-            FILE_APPEND
-        );
-        
+        $this->copyRoute();
     }
 
     protected function copyControllers()
     {
-        $auth_controller_path = $this->getAuthControllerPath();
+        $controller_path = $this->getControllerPath();
+        if (!file_exists($controller_path.'/Auth')) {
+            mkdir($controller_path.'/Auth', 0775, true);
+        }
         foreach ($this->controllers as $stub_filepath => $php_filepath) {
-            $contents = $this->compileStub(__DIR__.'/stubs/make/controllers/'.$stub_filepath);
-            $php_filepath = $auth_controller_path.'/'.$php_filepath;
+            $contents = $this->compileStub(__DIR__.'/stubs/controllers/'.$stub_filepath);
+            $php_filepath = $controller_path.'/'.$php_filepath;
             if (file_exists($php_filepath)) {
                 $this->error("[Error]{$php_filepath} file is already exists...skip");
                 continue;
             }
-            $this->copyStub($php_filepath, $contents);
-        }
-
-        $home_controller_path = $this->getHomeControllerPath().'/HomeController.php';
-        if (file_exists($home_controller_path)) {
-            $this->error("[Error]{$home_controller_path} file is already exists...skip");
-        } else {
-            $contents = $this->compileStub(__DIR__.'/stubs/make/controllers/HomeController.stub');
-            $this->copyStub($home_controller_path, $contents);
+            Stub::copy($php_filepath, $contents);
         }
     }
 
@@ -99,78 +85,76 @@ class ScaffoldAuthCommand extends Command
     {
         $resouce_path = $this->getResourcePath();
         foreach ($this->views as $stub_filepath => $php_filepath) {
-            $contents = $this->compileStub(__DIR__.'/stubs/make/views/'.$stub_filepath);
+            $contents = $this->compileStub(__DIR__.'/stubs/views/'.$stub_filepath);
             $php_filepath = $resouce_path.'/'.$php_filepath;
             if (file_exists($php_filepath)) {
                 $this->error("[Error]{$php_filepath} file is already exists...skip");
                 continue;
             }   
-            $this->copyStub($php_filepath, $contents);
+            Stub::copy($php_filepath, $contents);
         }
-        
     }
 
     protected function copyModel()
     {
-        $model_filepath = app_path().'/'.$this->model_name.'.php';
+        $model_dirpath = app_path('Models');
+        if (!file_exists($model_dirpath)) {
+            mkdir($model_dirpath, 0775, true);
+        }
+        $model_filepath = $model_dirpath.'/'.$this->model->singular_camel.'.php';
         if (file_exists($model_filepath)) {
             $this->error("[Error]{$model_filepath} file is already exists...skip");
         } else {   
             file_put_contents(
                 $model_filepath,
-                $this->compileStub(__DIR__.'/stubs/make/models/Model.stub')
+                $this->compileStub(__DIR__.'/stubs/models/Model.stub')
             );
         }
     }
 
     protected function copyMigration()
     {
-        $migration_filepath = base_path().'/database/migrations/2014_10_12_000000_create_'.$this->table_name.'_table.php';
+        $migration_filepath = base_path().'/database/migrations/2014_10_12_000000_create_'.$this->model->plural_snake.'_table.php';
         if (file_exists($migration_filepath)) {
             $this->error("[Error]{$migration_filepath} file is already exists...skip");
         } else {   
             file_put_contents(
                 $migration_filepath,
-                $this->compileStub(__DIR__.'/stubs/make/migrations/2014_10_12_000000_create_model_table.stub')
+                $this->compileStub(__DIR__.'/stubs/migrations/2014_10_12_000000_create_model_table.stub')
             );
         }
     }
 
     protected function copySeeder()
     {
-        $seeder_filepath = base_path().'/database/seeds/'.$this->model_name.'Seeder.php';
+        $seeder_filepath = base_path().'/database/seeds/'.$this->model->singular_camel.'Seeder.php';
         if (file_exists($seeder_filepath)) {
             $this->error("[Error]{$seeder_filepath} file is already exists...skip");
         } else {   
             file_put_contents(
                 $seeder_filepath,
-                $this->compileStub(__DIR__.'/stubs/make/seeds/ModelSeeder.stub')
+                $this->compileStub(__DIR__.'/stubs/seeds/ModelSeeder.stub')
             );
         }
     }
 
-    protected function getAuthControllerPath()
+    protected function copyRoute()
     {
-        $app_path = app_path('Http/Controllers/');
-        $auth_dirpath = $app_path.$this->namespace.'/Auth';
-        if (file_exists($auth_dirpath)) {
-            $this->error("[Error]{$auth_dirpath} directory is already exists...skip");
-        } else {
-            mkdir($auth_dirpath);
-        }
-        return $auth_dirpath;
+        file_put_contents(
+            base_path('routes/'.$this->app->singular_snake.'.php'),
+            $this->compileStub(__DIR__.'/stubs/routes.stub')
+        ); 
     }
 
-    protected function getHomeControllerPath()
+    protected function getControllerPath()
     {
-        $app_path = app_path('Http/Controllers/');
-        $home_dirpath = $app_path.$this->namespace;
-        return $home_dirpath;
+        $dirpath = app_path($this->app->singular_camel.'/Http/Controllers/');
+        return $dirpath;
     }
 
     protected function getResourcePath()
     {
-        $resource_dirpath = resource_path('views/'.$this->app_name);
+        $resource_dirpath = resource_path('views/'.$this->app->singular_snake);
         if (file_exists($resource_dirpath.'/auth')) {
             $this->error("[Error]{$resource_dirpath}/auth directory is already exists...skip");
         } else {
@@ -187,44 +171,5 @@ class ScaffoldAuthCommand extends Command
             mkdir($resource_dirpath.'/layouts');
         }
         return $resource_dirpath;
-    }
-
-    protected function copyStub($php_filepath, $content)
-    {
-        file_put_contents(
-            $php_filepath,
-            $content
-        );
-    }
-
-    protected function compileStub($stub_filepath)
-    {
-        $ret = str_replace(
-            '{{app_name}}',
-            $this->app_name,
-            file_get_contents($stub_filepath)
-        );
-        $ret = str_replace(
-            '{{namespace}}',
-            $this->namespace,
-            $ret
-        );
-        $ret = str_replace(
-            '{{model_name}}',
-            $this->model_name,
-            $ret
-        );
-        $ret = str_replace(
-            '{{table_name}}',
-            $this->table_name,
-            $ret
-        );
-        $ret = str_replace(
-            '{{camel_table_name}}',
-            $this->camel_table_name,
-            $ret
-        );
-
-        return $ret;
     }
 }

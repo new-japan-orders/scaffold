@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\{{namespace}}\Auth;
+namespace App\{{app_singular_camel}}\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Auth\RegisterController as Controller;
@@ -14,7 +14,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/{{app_name}}/home';
+    protected $redirectTo = '/{{app_singular_snake}}/home';
 
     /**
      * Create a new controller instance.
@@ -23,7 +23,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:{{app_singular_snake}}');
     }
 
     /**
@@ -49,7 +49,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return {{model_name}}::create([
+        return {{model_singular_camel}}::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -58,11 +58,11 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('{{app_name}}.auth.register');
+        return view('{{app_singular_snake}}.auth.register');
     }
 
     protected function guard()
     {   
-        return \Auth::guard('{{app_name}}');
+        return \Auth::guard('{{app_singular_snake}}');
     }
 }
