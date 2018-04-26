@@ -75,7 +75,7 @@ class ScaffoldAuthCommand extends Command
             $contents = $this->compileStub(__DIR__.'/stubs/controllers/'.$stub_filepath);
             $php_filepath = $controller_path.'/'.$php_filepath;
             if (file_exists($php_filepath)) {
-                $this->error("[Error]{$php_filepath} file is already exists...skip");
+                $this->comment("[Warning]{$php_filepath} file is already exists...skip");
                 continue;
             }
             Stub::copy($php_filepath, $contents);
@@ -89,7 +89,7 @@ class ScaffoldAuthCommand extends Command
             $contents = $this->compileStub(__DIR__.'/stubs/views/'.$stub_filepath);
             $php_filepath = $resouce_path.'/'.$php_filepath;
             if (file_exists($php_filepath)) {
-                $this->error("[Error]{$php_filepath} file is already exists...skip");
+                $this->comment("[Warning]{$php_filepath} file is already exists...skip");
                 continue;
             }   
             Stub::copy($php_filepath, $contents);
@@ -104,7 +104,7 @@ class ScaffoldAuthCommand extends Command
         }
         $model_filepath = $model_dirpath.'/'.$this->model->singular_camel.'.php';
         if (file_exists($model_filepath)) {
-            $this->error("[Error]{$model_filepath} file is already exists...skip");
+            $this->comment("[Warning]{$model_filepath} file is already exists...skip");
         } else {   
             file_put_contents(
                 $model_filepath,
@@ -121,7 +121,7 @@ class ScaffoldAuthCommand extends Command
         }
         $filepath = $dirpath.'/ResetPassword.php';
         if (file_exists($filepath)) {
-            $this->error("[Error]{$filepath} file is already exists...skip");
+            $this->comment("[Warning]{$filepath} file is already exists...skip");
         } else {   
             file_put_contents(
                 $filepath,
@@ -134,7 +134,7 @@ class ScaffoldAuthCommand extends Command
     {
         $migration_filepath = base_path().'/database/migrations/2014_10_12_000000_create_'.$this->model->plural_snake.'_table.php';
         if (file_exists($migration_filepath)) {
-            $this->error("[Error]{$migration_filepath} file is already exists...skip");
+            $this->comment("[Warning]{$migration_filepath} file is already exists...skip");
         } else {   
             file_put_contents(
                 $migration_filepath,
@@ -147,7 +147,7 @@ class ScaffoldAuthCommand extends Command
     {
         $seeder_filepath = base_path().'/database/seeds/'.$this->model->singular_camel.'Seeder.php';
         if (file_exists($seeder_filepath)) {
-            $this->error("[Error]{$seeder_filepath} file is already exists...skip");
+            $this->comment("[Warning]{$seeder_filepath} file is already exists...skip");
         } else {   
             file_put_contents(
                 $seeder_filepath,
@@ -174,17 +174,17 @@ class ScaffoldAuthCommand extends Command
     {
         $resource_dirpath = resource_path('views/'.$this->app->singular_snake);
         if (file_exists($resource_dirpath.'/auth')) {
-            $this->error("[Error]{$resource_dirpath}/auth directory is already exists...skip");
+            $this->comment("[Warning]{$resource_dirpath}/auth directory is already exists...skip");
         } else {
             mkdir($resource_dirpath.'/auth');
         }
         if (file_exists($resource_dirpath.'/auth/passwords')) {
-            $this->error("[Error]{$resource_dirpath}/auth/passwords directory is already exists...skip");
+            $this->comment("[Warning]{$resource_dirpath}/auth/passwords directory is already exists...skip");
         } else {
             mkdir($resource_dirpath.'/auth/passwords');
         } 
         if (file_exists($resource_dirpath.'/layouts')) {
-            $this->error("[Error]{$resource_dirpath}/layouts directory is already exists...skip");
+            $this->comment("[Warning]{$resource_dirpath}/layouts directory is already exists...skip");
         } else {
             mkdir($resource_dirpath.'/layouts');
         }

@@ -40,13 +40,17 @@ class ScaffoldPolicyCommand extends Command
     {
         $this->getArguments();
 
-        $contents = $this->compileStub(__DIR__.'/stubs/policies/ModelPolicy.stub');
-
         $policy_dirpath = base_path($this->app->singular_snake.'/Policies');
         if (!file_exists($policy_dirpath)) {
             mkdir($policy_dirpath, 0775, true); 
         }
+
         $policy_filepath = $policy_dirpath.'/'.$this->model->singular_camel.'Policy.php';
-        Stub::copy($policy_filepath, $contents); 
+        if (file_exists($policy_filepath)) {
+            $this->comment("[Warning]{$policy_filepath} file is already exists...skip");
+        } else {
+            $contents = $this->compileStub(__DIR__.'/stubs/policies/ModelPolicy.stub');
+            Stub::copy($policy_filepath, $contents); 
+        }
     }
 }

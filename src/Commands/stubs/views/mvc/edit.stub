@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    @include('error')
+    @include('{{app_singular_snake}}.elements.error')
 
     <div class="row">
         <div class="col-md-12">

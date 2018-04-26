@@ -2,6 +2,7 @@
 
 Route::group(['prefix' => '{{app_singular_snake}}', 'as' => '{{app_singular_snake}}.'], function () {
     Auth::routes();
+    Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index')->name('home');
 
     /// リソースを追加したい場合は以下のようにする

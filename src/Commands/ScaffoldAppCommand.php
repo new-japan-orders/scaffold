@@ -44,7 +44,7 @@ class ScaffoldAppCommand extends Command
 
         foreach ($dirs as $dir) {
             if (file_exists($dir)) {
-                $this->comment("[WARNING]{$dir} directory is already exists...skip");
+                $this->comment("[Warning]{$dir} directory is already exists...skip");
             } else {
                 mkdir($dir, 0775, true);
             }

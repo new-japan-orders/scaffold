@@ -37,11 +37,15 @@ class ScaffoldControllerCommand extends Command
     public function handle()
     {
         $this->getArguments();
-        
-        $contents = $this->compileStub(__DIR__.'/stubs/controllers/MVCController.stub');
 
         $controller_dirpath = base_path($this->app->singular_snake.'/Http/Controllers');
         $controller_filepath = $controller_dirpath.'/'.$this->model->singular_camel.'Controller.php';
-        Stub::copy($controller_filepath, $contents);
+
+        if (file_exists($controller_filepath)) {
+            $this->comment("[Warning]{$controller_filepath} file is already exists...skip");
+        } else {
+            $contents = $this->compileStub(__DIR__.'/stubs/controllers/MVCController.stub');
+            Stub::copy($controller_filepath, $contents);
+        }
     }
 }
