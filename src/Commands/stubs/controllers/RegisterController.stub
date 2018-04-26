@@ -1,8 +1,8 @@
 <?php
 
-namespace App\{{app_singular_camel}}\Http\Controllers\Auth;
+namespace {{app_singular_camel}}\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\{{model_singular_camel}};
 use App\Http\Controllers\Auth\RegisterController as Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -45,7 +45,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Models\{{model_singular_camel}}
      */
     protected function create(array $data)
     {

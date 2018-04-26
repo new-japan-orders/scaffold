@@ -1,8 +1,8 @@
 <?php
 
-namespace App\{{app_singular_camel}}\Http\Controllers;
+namespace {{app_singular_camel}}\Http\Controllers;
 
-use App\{{app_singular_camel}}\Http\Controllers\Controller;
+use {{app_singular_camel}}\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

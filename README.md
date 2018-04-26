@@ -19,17 +19,20 @@ base_path
 ├ app
 │   ├ Models
 │   │   └ User.php  
-│   └ Front
-│       └ Http
-│           └ Controllers
-│               ├ Controller.php
-│               ├ HomeController.php
-│               └ Auth
-│                   ├ LoginController.php
-│                   ├ ForgetController.php
-│                   ├ RegisterController.php
-│                   └ ResetController.php
-│
+│   └ Policies
+├ front
+│   ├ Http
+│   │   └ Controllers
+│   │       ├ Controller.php
+│   │       ├ HomeController.php
+│   │       └ Auth
+│   │           ├ LoginController.php
+│   │           ├ ForgetController.php
+│   │           ├ RegisterController.php
+│   │           └ ResetController.php
+│   ├ Policies
+│   └ Notifications
+│       └ ResetPassword.php
 ├ resources
 │   └ views
 │       └ front
@@ -61,6 +64,7 @@ php artisan scaffold:auth front user
 ```
 
 ### 使い方
+frontとadminの2つ作る例。
 
 #### コマンド実行例
 ```
@@ -70,8 +74,22 @@ php artisan migrate
 php artisan db:seed --class UserSeeder
 php artisan db:seed --class AdminSeeder
 ```
+#### composer autoloadの設定
+composer.json
+```
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Front\\": "front/",
+            "Admin\\": "admin/"
+        }   
+    },  
+```
+編集後にcomposer dump-autoloadする。
+
 #### MultiAuthの設定
-``` config/auth.php
+config/auth.php
+```
 
 return [
     'defaults' => [
@@ -164,11 +182,11 @@ app/Providers/RouteServiceProvider.php
     protected function mapWebRoutes()
     {   
         Route::middleware('web')
-             ->namespace('App\Front\Http\Controllers')
+             ->namespace('Front\Http\Controllers')
              ->group(base_path('routes/front.php'));
 
         Route::middleware('web')
-             ->namespace('App\Admin\Http\Controllers')
+             ->namespace('Admin\Http\Controllers')
              ->group(base_path('routes/admin.php'));
     }   
 ```

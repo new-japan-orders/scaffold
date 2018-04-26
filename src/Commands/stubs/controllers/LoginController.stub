@@ -1,6 +1,6 @@
 <?php
 
-namespace App\{{app_singular_camel}}\Http\Controllers\Auth;
+namespace {{app_singular_camel}}\Http\Controllers\Auth;
 
 use App\Http\Controllers\Auth\LoginController as Controller;
 

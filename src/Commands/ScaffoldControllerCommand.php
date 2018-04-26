@@ -40,7 +40,7 @@ class ScaffoldControllerCommand extends Command
         
         $contents = $this->compileStub(__DIR__.'/stubs/controllers/MVCController.stub');
 
-        $controller_dirpath = app_path($this->app->singular_camel.'/Http/Controllers');
+        $controller_dirpath = base_path($this->app->singular_snake.'/Http/Controllers');
         $controller_filepath = $controller_dirpath.'/'.$this->model->singular_camel.'Controller.php';
         Stub::copy($controller_filepath, $contents);
     }

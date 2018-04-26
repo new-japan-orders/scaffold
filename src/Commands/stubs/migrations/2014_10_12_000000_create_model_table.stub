@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Create{{model_singular_camel}}Table extends Migration
+class Create{{model_plural_camel}}Table extends Migration
 {
     /**
      * Run the migrations.

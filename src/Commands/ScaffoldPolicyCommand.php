@@ -42,7 +42,7 @@ class ScaffoldPolicyCommand extends Command
 
         $contents = $this->compileStub(__DIR__.'/stubs/policies/ModelPolicy.stub');
 
-        $policy_dirpath = app_path($this->app->singular_camel.'/Policies');
+        $policy_dirpath = base_path($this->app->singular_snake.'/Policies');
         if (!file_exists($policy_dirpath)) {
             mkdir($policy_dirpath, 0775, true); 
         }

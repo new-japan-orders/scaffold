@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use {{app_singular_camel}}\Notifications\ResetPassword as ResetPasswordNotification;
 
 class {{model_singular_camel}} extends Authenticatable
 {
@@ -26,4 +27,15 @@ class {{model_singular_camel}} extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /** 
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {   
+        $this->notify(new ResetPasswordNotification($token));
+    }
 }

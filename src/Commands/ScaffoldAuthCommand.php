@@ -59,6 +59,7 @@ class ScaffoldAuthCommand extends Command
         $this->copyControllers();
         $this->copyResources();
         $this->copyModel();
+        $this->copyNotification();
         $this->copyMigration(); 
         $this->copySeeder();
         $this->copyRoute();
@@ -112,6 +113,23 @@ class ScaffoldAuthCommand extends Command
         }
     }
 
+    protected function copyNotification()
+    {
+        $dirpath = base_path($this->app->singular_snake.'/Notifications');
+        if (!file_exists($dirpath)) {
+            mkdir($dirpath, 0775, true);
+        }
+        $filepath = $dirpath.'/ResetPassword.php';
+        if (file_exists($filepath)) {
+            $this->error("[Error]{$filepath} file is already exists...skip");
+        } else {   
+            file_put_contents(
+                $filepath,
+                $this->compileStub(__DIR__.'/stubs/notifications/ResetPassword.stub')
+            );  
+        } 
+    }
+
     protected function copyMigration()
     {
         $migration_filepath = base_path().'/database/migrations/2014_10_12_000000_create_'.$this->model->plural_snake.'_table.php';
@@ -148,7 +166,7 @@ class ScaffoldAuthCommand extends Command
 
     protected function getControllerPath()
     {
-        $dirpath = app_path($this->app->singular_camel.'/Http/Controllers/');
+        $dirpath = base_path($this->app->singular_snake.'/Http/Controllers/');
         return $dirpath;
     }
 

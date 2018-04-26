@@ -37,20 +37,17 @@ class ScaffoldAppCommand extends Command
     {
         $this->getArguments();
 
-        $controller_dirpath = app_path($this->app->singular_camel.'/Http/Controllers');
-        if (file_exists($controller_dirpath)) {
-            $this->error("[ERROR]{$controller_dirpath} directory is already exists...skip");
-        } else {    
-            mkdir($controller_dirpath, 0775, true);
-        }
-        
-        $resource_dirpath = resource_path('/views/' .$this->app->singular_snake); 
-        if (file_exists($resource_dirpath)) {
-            $this->error("[ERROR]{$resource_dirpath} directory is already exists...skip");
-        } else {
-            mkdir($resource_dirpath);
-        }
-        
-        
+        $dirs[] = base_path($this->app->singular_snake);
+        $dirs[] = base_path($this->app->singular_snake.'/Http/Controllers');
+        $dirs[] = base_path($this->app->singular_snake.'/Policies');
+        $dirs[] = resource_path('/views/' .$this->app->singular_snake);
+
+        foreach ($dirs as $dir) {
+            if (file_exists($dir)) {
+                $this->comment("[WARNING]{$dir} directory is already exists...skip");
+            } else {
+                mkdir($dir, 0775, true);
+            }
+        } 
     }
 }

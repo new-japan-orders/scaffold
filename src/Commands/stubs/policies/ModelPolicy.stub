@@ -1,6 +1,6 @@
 <?php
 
-namespace App\{{app_singular_camel}}\Policies;
+namespace {{app_singular_camel}}\Policies;
 
 use App\Models\{{model_singular_camel}};
 use App\Models\{{auth_singular_camel}};
