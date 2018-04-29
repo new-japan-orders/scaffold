@@ -2,8 +2,6 @@
 
 namespace NewJapanOrders\Scaffold;
 
-use NewJapanOrders\Scaffold\Argument;
-
 class Stub
 {
     static function copy($php_filepath, $contents)
@@ -13,18 +11,6 @@ class Stub
             $contents
         );
     }
-
-/*
-    static function compileAll($stub_filepath, $args = [])
-    {
-        $contents = file_get_contents($stub_filepath);
-        foreach ($args as $key => $arg) {
-            $contents = self::compile($contents, $arg, $key);
-        }
-
-        return $contents;
-    }
-*/
 
     static function compile($contents, $key, $value)
     {

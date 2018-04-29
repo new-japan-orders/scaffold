@@ -3,7 +3,7 @@
 namespace NewJapanOrders\Scaffold\Commands;
 
 use Illuminate\Console\Command;
-use NewJapanOrders\Scaffold\Stub;
+use NewJapanOrders\Stub\Stub;
 use NewJapanOrders\Scaffold\ArgumentsTrait;
 
 class ScaffoldModelCommand extends Command

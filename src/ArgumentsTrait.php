@@ -3,7 +3,7 @@
 namespace NewJapanOrders\Scaffold;
 
 use NewJapanOrders\Scaffold\Argument;
-use NewJapanOrders\Scaffold\Stub;
+use NewJapanOrders\Stub\Stub;
 
 trait ArgumentsTrait
 {
