@@ -1,9 +1,9 @@
 <?php
 
-namespace NewWorldOrders\Scaffold;
+namespace NewJapanOrders\Scaffold;
 
-use NewWorldOrders\Scaffold\Argument;
-use NewWorldOrders\Scaffold\Stub;
+use NewJapanOrders\Scaffold\Argument;
+use NewJapanOrders\Scaffold\Stub;
 
 trait ArgumentsTrait
 {

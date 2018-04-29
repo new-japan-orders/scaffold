@@ -1,5 +1,5 @@
 {
-  "name": "new-world-orders/scaffold",
+  "name": "new-japan-orders/scaffold",
   "type": "library",
   "license": "MIT",
   "require": {
@@ -8,13 +8,13 @@
   },
   "autoload": {
     "psr-4": {
-      "NewWorldOrders\\Scaffold\\": "src/"
+      "NewJapanOrders\\Scaffold\\": "src/"
     }   
   },
   "extra": {
     "laravel": {
         "providers": [
-            "NewWorldOrders\\Scaffold\\ScaffoldServiceProvider"
+            "NewJapanOrders\\Scaffold\\ScaffoldServiceProvider"
         ]
     }
   }

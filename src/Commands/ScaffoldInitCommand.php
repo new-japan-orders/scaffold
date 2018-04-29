@@ -1,6 +1,6 @@
 <?php
 
-namespace NewWorldOrders\Scaffold\Commands;
+namespace NewJapanOrders\Scaffold\Commands;
 
 use Illuminate\Console\Command;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace NewWorldOrders\Scaffold;
+namespace NewJapanOrders\Scaffold;
 
 class Argument
 {

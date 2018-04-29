@@ -1,8 +1,8 @@
 <?php
 
-namespace NewWorldOrders\Scaffold;
+namespace NewJapanOrders\Scaffold;
 
-use NewWorldOrders\Scaffold\Argument;
+use NewJapanOrders\Scaffold\Argument;
 
 class Stub
 {

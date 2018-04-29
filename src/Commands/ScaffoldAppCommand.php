@@ -1,9 +1,9 @@
 <?php
 
-namespace NewWorldOrders\Scaffold\Commands;
+namespace NewJapanOrders\Scaffold\Commands;
 
 use Illuminate\Console\Command;
-use NewWorldOrders\Scaffold\ArgumentsTrait;
+use NewJapanOrders\Scaffold\ArgumentsTrait;
 
 class ScaffoldAppCommand extends Command
 {

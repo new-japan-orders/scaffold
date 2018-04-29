@@ -1,10 +1,10 @@
 <?php
 
-namespace NewWorldOrders\Scaffold\Commands;
+namespace NewJapanOrders\Scaffold\Commands;
 
 use Illuminate\Console\Command;
-use NewWorldOrders\Scaffold\Stub;
-use NewWorldOrders\Scaffold\ArgumentsTrait;
+use NewJapanOrders\Scaffold\Stub;
+use NewJapanOrders\Scaffold\ArgumentsTrait;
 
 
 class ScaffoldAuthCommand extends Command
