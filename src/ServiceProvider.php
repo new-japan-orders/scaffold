@@ -2,9 +2,9 @@
 
 namespace NewJapanOrders\Scaffold;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as Provider;
 
-class ScaffoldServiceProvider extends ServiceProvider {
+class ServiceProvider extends Provider {
 
     /** 
      * Bootstrap the application services.
