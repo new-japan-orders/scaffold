@@ -28,7 +28,7 @@ class ScaffoldViewCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new views.';
+    protected $description = 'Create a new Views.';
 
     public function __construct()
     {   

@@ -22,7 +22,7 @@ class ScaffoldControllerCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new controller.';
+    protected $description = 'Create a new Controller.';
 
     public function __construct()
     {   

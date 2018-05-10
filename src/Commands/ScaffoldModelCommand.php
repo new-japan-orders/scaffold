@@ -22,7 +22,7 @@ class ScaffoldModelCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new model';
+    protected $description = 'Create a new Model.';
 
     public function __construct()
     {   
