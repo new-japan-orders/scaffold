@@ -131,14 +131,14 @@ return [
         // ],
     ],
     'passwords' => [
-        'users' => [
+        'front' => [
             'provider' => 'users',
-            'table' => 'password_resets',
+            'table' => 'user_password_resets',
             'expire' => 60,
         ],
-        'admins' => [
+        'admin' => [
             'provider' => 'admins',
-            'table' => 'password_resets',
+            'table' => 'admin_password_resets',
             'expire' => 60,
         ],
     ],

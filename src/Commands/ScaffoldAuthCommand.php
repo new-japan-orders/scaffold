@@ -34,7 +34,7 @@ class ScaffoldAuthCommand extends Command
         'auth/passwords/reset.stub' => 'auth/passwords/reset.blade.php',
         'layouts/app.stub' => 'layouts/app.blade.php',
     ];
-    
+
     /**
      * The console command description.
      *
@@ -60,7 +60,7 @@ class ScaffoldAuthCommand extends Command
         $this->copyResources();
         $this->copyModel();
         $this->copyNotification();
-        $this->copyMigration(); 
+        $this->copyMigrations(); 
         $this->copySeeder();
         $this->copyRoute();
     }
@@ -130,8 +130,24 @@ class ScaffoldAuthCommand extends Command
         } 
     }
 
-    protected function copyMigration()
+    protected function copyMigrations()
     {
+        $migrations = [
+            base_path().'/database/migrations/2014_10_12_000000_create_'.$this->model->plural_snake.'_table.php' => __DIR__.'/stubs/migrations/2014_10_12_000000_create_model_table.stub',
+            base_path().'/database/migrations/2014_10_12_100000_create_'.$this->model->singular_snake.'_password_resets_table.php' => __DIR__.'/stubs/migrations/2014_10_12_100000_create_password_resets_table.stub',
+        ];
+
+        foreach ($migrations as $migration_filepath => $stub_filepath) {
+            if (file_exists($migration_filepath)) {
+                $this->comment("[Warning]{$migration_filepath} file is already exists...skip");
+            } else {   
+                file_put_contents(
+                    $migration_filepath,
+                    $this->compileStub($stub_filepath)
+                );
+            }
+        }
+/*
         $migration_filepath = base_path().'/database/migrations/2014_10_12_000000_create_'.$this->model->plural_snake.'_table.php';
         if (file_exists($migration_filepath)) {
             $this->comment("[Warning]{$migration_filepath} file is already exists...skip");
@@ -141,6 +157,7 @@ class ScaffoldAuthCommand extends Command
                 $this->compileStub(__DIR__.'/stubs/migrations/2014_10_12_000000_create_model_table.stub')
             );
         }
+*/
     }
 
     protected function copySeeder()
