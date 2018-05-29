@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d5f9820c16355e900f0e0d630328981",
+    "content-hash": "34a1e7e69761a9dac535872f8d8c0ad6",
     "packages": [
         {
             "name": "bestmomo/laravel-email-confirmation",
@@ -984,6 +984,35 @@
                 "time"
             ],
             "time": "2018-03-19T15:50:49+00:00"
+        },
+        {
+            "name": "new-japan-orders/arguments",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/new-japan-orders/arguments.git",
+                "reference": "0231a2f3e5d1ff5675bf3f993b00e72390b849f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/new-japan-orders/arguments/zipball/0231a2f3e5d1ff5675bf3f993b00e72390b849f9",
+                "reference": "0231a2f3e5d1ff5675bf3f993b00e72390b849f9",
+                "shasum": ""
+            },
+            "require": {
+                "new-japan-orders/stub": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "NewJapanOrders\\Arguments\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2018-05-29T04:07:27+00:00"
         },
         {
             "name": "new-japan-orders/stub",

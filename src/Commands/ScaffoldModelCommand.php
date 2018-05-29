@@ -4,11 +4,11 @@ namespace NewJapanOrders\Scaffold\Commands;
 
 use Illuminate\Console\Command;
 use NewJapanOrders\Stub\Stub;
-use NewJapanOrders\Scaffold\ArgumentsTrait;
+use NewJapanOrders\Arguments\CompilableArguments;
 
 class ScaffoldModelCommand extends Command
 {
-    use ArgumentsTrait;
+    use CompilableArguments;
 
     /**
      * The console command name!
